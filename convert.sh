@@ -15,6 +15,14 @@ fileList=(`ls -1 ./$dirIn`)
 fileCount=0
 for f in "${fileList[@]}" ; do
 	((fileCount++))
-	printf "% 4d%% %s\n" $(($fileCount*100/${#fileList[@]})) $f
+	printf "\033[37;46;1m% 4d%%\033[0m \033[36m%s\033[0m\n" $(($fileCount*100/${#fileList[@]})) $f
+	
+	convert ./$dirIn/$f\
+		-negate\
+		./$dirOut/$f
+
+	if [ $fileCount -eq 3 ]; then
+		exit
+	fi
 done
 
