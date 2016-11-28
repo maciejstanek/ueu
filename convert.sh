@@ -18,11 +18,9 @@ for f in "${fileList[@]}" ; do
 	printf "\033[37;46;1m% 4d%%\033[0m \033[36m%s\033[0m\n" $(($fileCount*100/${#fileList[@]})) $f
 	
 	convert ./$dirIn/$f\
+		-crop 1740x890+110+85\
 		-negate\
+		-level 0,35%\
 		./$dirOut/$f
-
-	if [ $fileCount -eq 3 ]; then
-		exit
-	fi
 done
 
